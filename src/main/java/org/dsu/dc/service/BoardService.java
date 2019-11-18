@@ -13,4 +13,6 @@ public interface BoardService {
 	BoardVO get(Long bno);
 	boolean modify(BoardVO board);
 	boolean remove(Long bno);
+	
+	int getTotal(Criteria cri);
 }

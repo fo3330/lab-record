@@ -19,4 +19,6 @@ public interface BoardMapper {
 	BoardVO read(Long bno);
 	int delete(Long bno);
 	int update(BoardVO board);
+	
+	int getTotalCount(Criteria cri);
 }

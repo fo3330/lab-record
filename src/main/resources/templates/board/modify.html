@@ -66,6 +66,14 @@
 											LIST
 										</button>
 									</div>
+									<input type="hidden" 
+									       name="pageNum" th:value="${cri.pageNum}">
+									<input type="hidden" 
+									       name="amount" th:value="${cri.amount}">
+									<input type="hidden" name="type" 
+									       th:value="${cri.type}">
+									<input type="hidden" name="keyword" 
+									       th:value="${cri.keyword}">
 								</form>
 							</div>
 						</div>
@@ -89,8 +97,13 @@
 					if(operation == 'remove'){
 						formObj.attr("action", "/board/remove");
 					}else if(operation == 'list'){
-						self.location = "/board/list";
-						return;
+						formObj.attr("action", "/board/list").attr("method", "get");
+						var pageNumTag = $("input[name='pageNum']").clone();
+						var amountTag = $("input[name='amount']").clone();
+						
+						formObj.empty();
+						formObj.append(pageNumTag);
+						formObj.append(amount);
 					}
 					formObj.submit();
 				});
