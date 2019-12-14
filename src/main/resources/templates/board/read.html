@@ -3,41 +3,43 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head th:replace="fragments/config :: configFragment"> </head>
 	
-	<body class="hold-transition skin-blue layout-top-nav">
+	<body class="hold-transition skin-black layout-top-nav">
 		<div class="wrapper">
 			<header th:replace="fragments/header :: naviFragment"></header>
 			
 			<div class="content-wrapper">
 				<div class="container">
 					<section class="content-header">
-						<h1>General Form Elements <small>Top Navigation</small></h1>
-						<ol class="breadcrumb">
-							<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-							<li><a href="#">Board</a></li>
-							<li class="active">Board Read Page</li>
+						<h1>디지털콘텐츠학과 <small>퇴실신청 및 확인 페이지</small></h1>
+					<ol class="breadcrumb">
+							<li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+							<li><a href="/board/list">list</a></li>
+							<li class="active">Read a record</li>
 						</ol>
+						
 					</section>
 					
 					<section class="content">
 						<div class="box">
 							<div class="box-header with-border">
-								<h3 class="box-title">Board Read Page</h3>
+								<h3 class="box-title">등록내용</h3>
 							</div>
+							
 							<div class="box-body" th:object="${board}">
 								<div class="form-group">
-									<label>Board #</label>
-									<input name="bno" class="form-control"
-									       th:value="*{bno}" readonly="readonly">
+									<label>학번</label>
+									<input name="stdno" class="form-control"
+									       th:value="*{stdno}" readonly="readonly">
 								</div>
 								
 								<div class="form-group">
-									<label>Title</label>
+									<label>이름</label>
 									<input name="title" class="form-control"
 									       th:value="*{title}" readonly="readonly">
 								</div>
 								
 								<div class="form-group">
-									<label>Content</label>
+									<label>실습실 이용 사유</label>
 									<textarea name="content" rows="3" 
 											  class="form-control"
 											  th:text="*{content}" readonly="readonly">
@@ -45,18 +47,24 @@
 								</div>
 								
 								<div class="form-group">
-									<label>Writer</label>
+									<label>pc사용 번호</label>
 									<input name="writer" 
 									       class="form-control"
 									       th:value="*{writer}" readonly="readonly">
 								</div>
+								<div class="form-group">
+									<label>등록시간</label>
+									<input name="regdate" 
+									       class="form-control"
+									       th:value="*{regdate}" readonly="readonly">
+								</div>
 								
 								<div class="box-footer">
 									<button data-oper="modify" type="submit" class="btn btn-warning">
-										MODIFY
+										퇴실 신청
 									</button>
 									<button data-oper="list" type="submit" class="btn btn-primary">
-										LIST
+										목록
 									</button>
 								</div>
 								

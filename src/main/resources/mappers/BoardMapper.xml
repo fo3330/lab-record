@@ -28,7 +28,7 @@
   	<select id="getListWithPaging" 
   			resultType="org.dsu.dc.domain.BoardVO">
   		<![CDATA[
-  		SELECT bno, title, content, writer, regdate, updateDate
+  		SELECT bno, title,stdno, content, writer, regdate, updateDate
   		FROM tbl_board
   		WHERE 
   		]]>
@@ -47,13 +47,13 @@
   	</select>
   	
   	<insert id="insert">
-  		INSERT INTO tbl_board (title, content, writer)
-  		VALUES (#{title}, #{content}, #{writer})
+  		INSERT INTO tbl_board (title,stdno, content, writer,regdate)
+  		VALUES (#{title}, #{stdno},#{content}, #{writer},#{regdate})
   	</insert>
   	
   	<insert id="insertSelectKey" parameterType="org.dsu.dc.domain.BoardVO">
-  		INSERT INTO tbl_board (title, content, writer)
-  		VALUES (#{title}, #{content}, #{writer})
+  		INSERT INTO tbl_board (title, stdno,content, writer,regdate,updateDate)
+  		VALUES (#{title},#{stdno}, #{content}, #{writer},#{regdate},#{updateDate})
   		<selectKey keyProperty="bno" resultType="long" order="AFTER">
   			SELECT MAX(bno) FROM tbl_board;
   		</selectKey>
@@ -71,7 +71,7 @@
   	
   	<update id="update">
   		UPDATE tbl_board
-  		SET title=#{title}, content=#{content}, writer=#{writer}, updateDate=now()
+  		SET title=#{title},stdno=#{stdno}, content=#{content}, writer=#{writer}, updateDate=#{updateDate}
   		WHERE bno=#{bno}
   	</update>
   	

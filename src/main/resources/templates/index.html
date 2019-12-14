@@ -3,28 +3,28 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head th:replace="fragments/config :: configFragment"> </head>
 	
-	<body class="hold-transition skin-blue layout-top-nav">
+	<body class="hold-transition skin-black layout-top-nav">
 		<div class="wrapper">
 			<header th:replace="fragments/header :: naviFragment"></header>
 			
 			<div class="content-wrapper">
 				<div class="container">
 					<section class="content-header">
-						<h1>General Form Elements <small>Top Navigation</small></h1>
+						<h1>디지털콘텐츠 학과 실습실 웹 페이지 <small>홈 페이지</small></h1>
 						<ol class="breadcrumb">
 							<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-							<li><a href="#">Layout</a></li>
-							<li class="active">Top Navigation</li>
+						
 						</ol>
 					</section>
 					
 					<section class="content">
 						<div class="box">
 							<div class="box-header with-border">
-								<h3 th:text="'Welcome to basic Bootstrap with Srping Boot created by' + ${username}"></h3>
-								<p th:text="'This date example ' + ${#dates.format(datetime, 'yyyy-MM-dd HH:mm')}"></p>
-								<p> is a quick exercise to illustrate how Bootstrap works. </p>
-								<a class="btn btn-lg btn-primary" href="#" role="button">View Docs &raquo;</a>
+								<h3 th:text="'디지털 콘텐츠학과 실습실 사용시 실습일지 작성하고 사용해주세요.'"></h3>
+								<p th:text="'현재시각: ' + ${#dates.format(datetime, 'yyyy-MM-dd HH:mm')}"></p>
+								<p> 애플리케이션 프레임워크 실습실 웹 페이지 과제 1551028 조용석 </p>
+								<a class="btn btn-lg btn-primary" href="/board/register" role="button">일지 등록하기 &raquo;</a>
+								<a class="btn btn-lg btn-info" href="/board/list" role="button">일지 목록 &raquo;</a>
 							</div>
 						</div>
 					</section>

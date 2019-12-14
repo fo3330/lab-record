@@ -3,28 +3,28 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head th:replace="fragments/config :: configFragment"> </head>
 	
-	<body class="hold-transition skin-blue layout-top-nav">
+	<body class="hold-transition skin-black layout-top-nav">
 		<div class="wrapper">
 			<header th:replace="fragments/header :: naviFragment"></header>
 			
 			<div class="content-wrapper">
 				<div class="container">
 					<section class="content-header">
-						<h1>General Form Elements <small>Top Navigation</small></h1>
+						<h1>디지털콘텐츠학과  <small>목록 페이지</small></h1>
 						<ol class="breadcrumb">
-							<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-							<li><a href="#">Board</a></li>
-							<li class="active">List All Page</li>
+							<li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+							
+							<li class="active"> List</li>
 						</ol>
-					</section>
+						</section>
 					
 					<section class="content">
 						<div class="box">
 							<div class="box-header with-border">
-								<h3 class="box-title">Board List Page</h3>
+								<h3 class="box-title">사용자 목록</h3>
 								<button id="regBtn" type="button"
 								        class="btn btn-default pull-right">
-									Register New Board
+								실습실 사용시간 등록
 								</button>
 							</div>
 							
@@ -34,17 +34,10 @@
 										<option th:value="''" th:selected="${pageMaker.cri.type == null? 'true' : 'false'}"
 										        th:text="'---'"></option>
 										<option th:value="'T'" th:selected="${pageMaker.cri.type == 'T'? 'true' : 'false'}"
-										        th:text="'제목'"></option>
-										<option th:value="'C'" th:selected="${pageMaker.cri.type == 'C'? 'true' : 'false'}"
-										        th:text="'내용'"></option>
+										        th:text="'이름'"></option>
 										<option th:value="'W'" th:selected="${pageMaker.cri.type == 'W'? 'true' : 'false'}"
-										        th:text="'작성자'"></option>
-										<option th:value="'TC'" th:selected="${pageMaker.cri.type == 'TC'? 'true' : 'false'}"
-									        	th:text="'제목 or 내용'"></option>
-									    <option th:value="'TW'" th:selected="${pageMaker.cri.type == 'TW'? 'true' : 'false'}"
-									        	th:text="'제목 or 작성자'"></option>
-									    <option th:value="'TCW'" th:selected="${pageMaker.cri.type == 'TCW'? 'true' : 'false'}"
-									        	th:text="'제목 or 내용 or 작성자'"></option>
+										        th:text="'사용번호'"></option>
+										
 									</select>
 									<input type="text" name="keyword" th:value="${pageMaker.cri.keyword}">
 									<input type="hidden" name="pageNum" 
@@ -56,21 +49,41 @@
 								
 								<table class="table table-bordered table-hover">
 									<tr>
-										<th style="width:10px">#</th>
-										<th>Title</th><th>Writer</th><th>Registered Date</th>
-										<th>Update Date</th>
+										<th style="width:20px">누적인원 </th><th>이름</th>
+										<th>학번 </th><th>pc 사용번호</th><th>시작시각</th>
+										<th>종료시각</th>
 									</tr>
 									<tr th:each="board:${list}">
 										<td th:text="${board.bno}"></td>
 										<td><a class="move" th:href="${board.bno}"
-										       th:text="${board.title}"></a></td>
+										     th:text="${board.title}"></a></td>
+										 <td th:text="${board.stdno}"></td>
 										<td th:text="${board.writer}"></td>
-										<td th:text="${#dates.format(board.regdate, 'yyyy-MM-dd HH:mm')}"></td>
-										<td th:text="${#dates.format(board.updateDate, 'yyyy-MM-dd HH:mm')}"></td>
+										<td th:text="${board.regdate}"></td>
+										<td th:text="${board.updateDate}"></td>
 									</tr>
+									
 								</table>
 								
-								<div class="text-center">
+								
+								<div class="modal fade" id="resultModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												<h4 class="modal-title">퇴실완료</h4>
+											</div>
+											<div class="modal-body">
+												<p>퇴실 완료되었습니다.</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div><div class="text-center">
 									<ul class="pagination" th:if="${pageMaker.endPage gt 1}">
 										<li th:if="${pageMaker.prev}">
 											<a th:href="${pageMaker.startPage-1}">&laquo;</a>
@@ -86,27 +99,7 @@
 									</ul>
 								</div>
 								
-								<div class="modal fade" id="resultModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" 
-												        data-dismiss="modal"
-												        aria-hidden="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-												<h4 class="modal-title">Board Info</h4>
-											</div>
-											<div class="modal-body">
-												<p>처리가 완료되었습니다.</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-												        data-dismiss="modal">Close</button>
-											</div>
-										</div>
-									</div>
-								</div>
+								
 								
 								<form id="actionForm" action="/board/list" method="get">
 									<input type="hidden" name="pageNum" 
@@ -140,9 +133,10 @@
 					}
 					if(parseInt(result) > 0){
 						$(".modal-body").html(
-								"게시글 " + parseInt(result) + "번이 등록되었습니다.");
+								 + parseInt(result) + "번째 학생입니다.");
 						$("#resultModal").modal("show");
 					}
+					$("#resultModal").modal("show");
 				}
 				
 				$("#regBtn").on("click", function(){
